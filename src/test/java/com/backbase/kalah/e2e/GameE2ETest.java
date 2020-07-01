@@ -1,10 +1,7 @@
 package com.backbase.kalah.e2e;
 
 import com.backbase.kalah.controller.GameController;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import com.backbase.kalah.presentation.GamePresentation;
 import com.backbase.kalah.presentation.NewGamePresentation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,11 +22,9 @@ public class GameE2ETest {
 
     @Autowired
     private TestRestTemplate restTemplate;
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Test
-    public void testGameFlow() throws JsonProcessingException {
+    public void testGameFlow() {
         //create game
         ResponseEntity<NewGamePresentation> newGameResponse = restTemplate.postForEntity(getEndpointPath(), null, NewGamePresentation.class);
         var game = newGameResponse.getBody();
@@ -43,15 +38,13 @@ public class GameE2ETest {
             ResponseEntity<String> response = restTemplate.exchange(getEndpointPath() + "/" + id + "/pits/" + pit, HttpMethod.PUT, null, String.class);
             pit = getNextPit(pit);
             String bodyString = response.getBody();
+            log.info("Response {}", response);
             if (response.getStatusCode().is4xxClientError()) {
-                log.info("{}", bodyString);
                 if (bodyString.equals("Game is finished")) {
                     break;
                 }
                 continue;
             }
-            var gamePresentation = objectMapper.readValue(bodyString, GamePresentation.class);
-            log.info("{}", gamePresentation);
             totalMoves++;
         }
 

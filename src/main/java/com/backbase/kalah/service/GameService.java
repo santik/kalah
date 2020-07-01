@@ -2,6 +2,7 @@ package com.backbase.kalah.service;
 
 import com.backbase.kalah.exception.KalahException;
 import com.backbase.kalah.model.Game;
+import com.backbase.kalah.model.Pit;
 import com.backbase.kalah.repository.GameRepository;
 import lombok.RequiredArgsConstructor;
 import com.backbase.kalah.presentation.GamePresentation;
@@ -21,24 +22,32 @@ public class GameService {
 
     public NewGamePresentation initGame() {
         final var game = Game.createGame();
-        Game savedGame = gameRepository.save(game);
+        var savedGame = gameRepository.save(game);
         return mapper.getNewGamePresentation(savedGame);
     }
 
-    public GamePresentation makeMove(UUID gameId, Integer pitIndex) throws KalahException {
+    public GamePresentation makeMove(UUID gameId, Integer pitIndex) {
         var game = findGame(gameId);
         synchronized (game) {
-            gameFlow.makeMove(game, pitIndex);
+            var pit = getPit(pitIndex, game);
+            gameFlow.makeMove(game, pit);
             return mapper.getGamePresentation(game);
         }
     }
 
-    public GamePresentation getGame(UUID gameId) throws KalahException {
+    public GamePresentation getGame(UUID gameId) {
         return mapper.getGamePresentation(findGame(gameId));
     }
 
-    private Game findGame(UUID gameId) throws KalahException {
-        Optional<Game> optionalGame = gameRepository.findById(gameId);
+    private Pit getPit(Integer pitIndex, Game game) {
+        if (pitIndex < 1 || pitIndex >= game.getBoard().size()) {
+            throw new KalahException("Pit not found");
+        }
+        return game.getBoard().get(pitIndex);
+    }
+
+    private Game findGame(UUID gameId) {
+        var optionalGame = gameRepository.findById(gameId);
         if (optionalGame.isEmpty()) {
             throw new KalahException("Game not found.");
         }

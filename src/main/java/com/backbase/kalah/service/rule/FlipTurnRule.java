@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-@Order(value=3)
+@Order(value = 4)
 class FlipTurnRule implements GameFlowRule {
 
     @Override

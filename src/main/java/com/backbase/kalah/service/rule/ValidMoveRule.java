@@ -3,20 +3,19 @@ package com.backbase.kalah.service.rule;
 import com.backbase.kalah.exception.KalahException;
 import com.backbase.kalah.model.Game;
 import com.backbase.kalah.model.Pit;
+import com.backbase.kalah.service.GameFlowRule;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ValidMoveRule {
+@Order(value = 1)
+class ValidMoveRule implements GameFlowRule {
 
-    public Pit apply(Game game, Integer pitIndex) throws KalahException {
+    @Override
+    public Pit apply(Game game, Pit pit) {
         if (game.isFinished()) {
             throw new KalahException("Game is finished");
         }
-
-        if (pitIndex < 1 || pitIndex >= game.getBoard().size()) {
-            throw new KalahException("Pit not found");
-        }
-        var pit = game.getBoard().get(pitIndex);
 
         if (game.isKalah(pit)) {
             throw new KalahException("Can not use kalah pit!");

@@ -15,7 +15,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
-public class GamePresentationMapper {
+class GamePresentationMapper {
 
     public NewGamePresentation getNewGamePresentation(Game game) {
         return NewGamePresentation.builder()

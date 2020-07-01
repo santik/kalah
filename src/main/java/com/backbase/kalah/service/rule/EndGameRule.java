@@ -9,15 +9,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-@Order(value=4)
+@Order(value = 5)
 class EndGameRule implements GameFlowRule {
 
     @Override
     public Pit apply(Game game, Pit pit) {
         if (game.isPlayer1EmptyPits() || game.isPlayer2EmptyPits()) {
             log.info("Game ended");
-            Integer player1TotalSeeds = game.countPlayer1Seeds();
-            Integer player2TotalSeeds = game.countPlayer2Seeds();
+            var player1TotalSeeds = game.countPlayer1Seeds();
+            var player2TotalSeeds = game.countPlayer2Seeds();
             if (player1TotalSeeds > player2TotalSeeds) {
                 game.setPlayer1Winner();
             } else if (player1TotalSeeds < player2TotalSeeds) {
@@ -28,6 +28,5 @@ class EndGameRule implements GameFlowRule {
         }
 
         return pit;
-
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-@Order(value=1)
+@Order(value = 2)
 class SowSeedsRule implements GameFlowRule {
 
     @Override

@@ -9,21 +9,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-@Order(value=2)
+@Order(value = 3)
 class LastWasEmptyRule implements GameFlowRule {
 
     @Override
     public Pit apply(Game game, Pit pit) {
         if (isPitWasEmptyAndOfCurrentUser(game, pit)) {
             log.info("Applying last was empty rule");
-            Pit oppositePit = game.getOppositeTo(pit);
+            var oppositePit = game.getOppositeTo(pit);
             if (oppositePit.getSeedsCount() == 0) {
                 log.info("No seeds in opposite pit :(");
                 return pit;
             }
 
-            Pit kalah = game.getCurrentPlayerKalah();
-            Integer kalahSeeds = kalah.getSeedsCount() + oppositePit.getSeedsCount() + pit.getSeedsCount();
+            var kalah = game.getCurrentPlayerKalah();
+            var kalahSeeds = kalah.getSeedsCount() + oppositePit.getSeedsCount() + pit.getSeedsCount();
             kalah.setSeedsCount(kalahSeeds);
             oppositePit.setSeedsCount(0);
             pit.setSeedsCount(0);
