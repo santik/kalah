@@ -9,7 +9,6 @@ import com.backbase.kalah.presentation.GamePresentation;
 import com.backbase.kalah.presentation.NewGamePresentation;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,7 +20,7 @@ public class GameService {
     private final GameFlow gameFlow;
 
     public NewGamePresentation initGame() {
-        final var game = Game.createGame();
+        final var game = Game.create();
         var savedGame = gameRepository.save(game);
         return mapper.getNewGamePresentation(savedGame);
     }

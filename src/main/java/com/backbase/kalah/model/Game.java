@@ -25,7 +25,7 @@ public class Game {
     private Integer winner;
     private List<Pit> board;
 
-    public static Game createGame() {
+    public static Game create() {
         var game = new Game();
         game.setUpBoard();
         game.id = UUID.randomUUID();
