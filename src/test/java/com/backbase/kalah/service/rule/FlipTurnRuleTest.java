@@ -12,12 +12,12 @@ import static org.mockito.Mockito.when;
 class FlipTurnRuleTest {
 
     @Test
-    void apply_withCurrentPlayerPit_shouldNotFlip() {
+    void apply_withCurrentPlayerKalah_shouldNotFlip() {
         //arrange
         var rule = new FlipTurnRule();
         var game = mock(Game.class);
         var pit = new Pit(1,1,1);
-        when(game.isCurrentPlayerPit(pit)).thenReturn(true);
+        when(game.getCurrentPlayerKalah()).thenReturn(pit);
 
         //act
         rule.apply(game, pit);
@@ -32,7 +32,8 @@ class FlipTurnRuleTest {
         var rule = new FlipTurnRule();
         var game = mock(Game.class);
         var pit = new Pit(1,1,1);
-        when(game.isCurrentPlayerPit(pit)).thenReturn(false);
+        var anotherPit = new Pit(1,1,1);
+        when(game.getCurrentPlayerKalah()).thenReturn(anotherPit);
 
         //act
         rule.apply(game, pit);

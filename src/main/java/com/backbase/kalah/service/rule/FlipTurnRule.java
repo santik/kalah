@@ -14,7 +14,7 @@ class FlipTurnRule implements GameFlowRule {
 
     @Override
     public Pit apply(Game game, Pit pit) {
-        if (!game.isCurrentPlayerPit(pit)) {
+        if (pit != game.getCurrentPlayerKalah()) {
             log.info("Flipping turn");
             game.flipTurn();
         }
