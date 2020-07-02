@@ -3,6 +3,7 @@ package com.backbase.kalah.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Game {
 
     private static final Integer PLAYER1_INDEX = 1;
     private static final Integer PLAYER2_INDEX = 2;
-    private static final Integer SEEDS_PER_PIT = 4;
+    private static final Integer SEEDS_PER_PIT = 6;
     private static final Integer PLAYER1_KALAH_INDEX = 7;
     private static final Integer PLAYER2_KALAH_INDEX = 14;
 

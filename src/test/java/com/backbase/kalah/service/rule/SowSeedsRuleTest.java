@@ -20,10 +20,10 @@ class SowSeedsRuleTest {
 
         //assert
         assertFalse(pit.hasSeeds());
-        assertEquals(5, game.getPitByIndex(2).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(3).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(4).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(5).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(2).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(3).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(4).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(5).get().getSeedsCount());
     }
 
     @Test
@@ -38,10 +38,10 @@ class SowSeedsRuleTest {
 
         //assert
         assertFalse(pit.hasSeeds());
-        assertEquals(5, game.getPitByIndex(6).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(6).get().getSeedsCount());
         assertEquals(1, game.getPitByIndex(7).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(8).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(9).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(8).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(9).get().getSeedsCount());
     }
 
     @Test
@@ -57,14 +57,14 @@ class SowSeedsRuleTest {
 
         //assert
         assertFalse(pit.hasSeeds());
-        assertEquals(5, game.getPitByIndex(6).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(6).get().getSeedsCount());
         assertEquals(1, game.getPitByIndex(7).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(8).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(9).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(10).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(11).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(12).get().getSeedsCount());
-        assertEquals(5, game.getPitByIndex(13).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(8).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(9).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(10).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(11).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(12).get().getSeedsCount());
+        assertEquals(7, game.getPitByIndex(13).get().getSeedsCount());
         assertEquals(0, game.getPitByIndex(14).get().getSeedsCount());
     }
 
@@ -82,8 +82,8 @@ class SowSeedsRuleTest {
         //assert
         Pit expectedLastPit = game.getPitByIndex(3).get();
         assertFalse(pit.hasSeeds());
-        assertEquals(5, game.getPitByIndex(2).get().getSeedsCount());
-        assertEquals(5, expectedLastPit.getSeedsCount());
+        assertEquals(7, game.getPitByIndex(2).get().getSeedsCount());
+        assertEquals(7, expectedLastPit.getSeedsCount());
         assertSame(expectedLastPit, lastPit);
     }
 }

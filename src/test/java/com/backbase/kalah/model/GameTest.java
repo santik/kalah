@@ -24,7 +24,7 @@ class GameTest {
                 assertEquals(0, pit.getSeedsCount());
             }
             if (pit != null && pit.getIndex() != 7 && pit.getIndex() != 14) {
-                assertEquals(4, pit.getSeedsCount());
+                assertEquals(6, pit.getSeedsCount());
             }
         });
     }
@@ -223,8 +223,8 @@ class GameTest {
         Game game = Game.create();
 
         //act && assert
-        assertEquals(24, game.countPlayer1Seeds());
-        assertEquals(24, game.countPlayer2Seeds());
+        assertEquals(36, game.countPlayer1Seeds());
+        assertEquals(36, game.countPlayer2Seeds());
     }
 
     @Test

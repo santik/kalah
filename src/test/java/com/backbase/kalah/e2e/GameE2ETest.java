@@ -48,7 +48,7 @@ public class GameE2ETest {
             totalMoves++;
         }
 
-        assertEquals(19, totalMoves);
+        assertEquals(24, totalMoves);
     }
 
     private int getNextPit(int pit) {

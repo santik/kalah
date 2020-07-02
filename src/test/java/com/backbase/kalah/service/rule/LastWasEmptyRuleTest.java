@@ -20,7 +20,7 @@ class LastWasEmptyRuleTest {
 
         //assert
         assertEquals(0, game.getOppositeTo(pit).getSeedsCount().intValue());
-        assertEquals(5, game.getCurrentPlayerKalah().getSeedsCount().intValue());
+        assertEquals(7, game.getCurrentPlayerKalah().getSeedsCount().intValue());
     }
 
     @Test
@@ -35,7 +35,7 @@ class LastWasEmptyRuleTest {
         rule.apply(game, pit);
 
         //assert
-        assertEquals(4, game.getOppositeTo(pit).getSeedsCount().intValue());
+        assertEquals(6, game.getOppositeTo(pit).getSeedsCount().intValue());
         assertEquals(0, game.getCurrentPlayerKalah().getSeedsCount().intValue());
     }
 
