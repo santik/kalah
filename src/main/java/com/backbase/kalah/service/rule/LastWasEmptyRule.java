@@ -18,7 +18,6 @@ class LastWasEmptyRule implements GameFlowRule {
             log.info("Applying last was empty rule");
             var oppositePit = game.getOppositeTo(pit);
             if (oppositePit.getSeedsCount() == 0) {
-                log.info("No seeds in opposite pit :(");
                 return pit;
             }
 

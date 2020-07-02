@@ -18,15 +18,15 @@ class ValidMoveRule implements GameFlowRule {
         }
 
         if (game.isKalah(pit)) {
-            throw new KalahException("Can not use kalah pit!");
+            throw new KalahException("Can not use kalah pit");
         }
 
         if (!game.isCurrentPlayerPit(pit)) {
-            throw new KalahException("Not your turn!");
+            throw new KalahException("Not your turn");
         }
 
         if (!pit.hasSeeds()) {
-            throw new KalahException("Empty pit!");
+            throw new KalahException("Empty pit");
         }
 
         return pit;

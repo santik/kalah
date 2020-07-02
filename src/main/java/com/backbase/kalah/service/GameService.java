@@ -20,7 +20,7 @@ public class GameService {
     private final GameFlow gameFlow;
 
     public NewGamePresentation initGame() {
-        final var game = Game.create();
+        var game = Game.create();
         var savedGame = gameRepository.save(game);
         return mapper.getNewGamePresentation(savedGame);
     }
@@ -50,7 +50,7 @@ public class GameService {
     private Game findGame(UUID gameId) {
         var optionalGame = gameRepository.findById(gameId);
         if (optionalGame.isEmpty()) {
-            throw new KalahException("Game not found.");
+            throw new KalahException("Game not found");
         }
 
         return optionalGame.get();
