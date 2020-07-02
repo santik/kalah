@@ -25,10 +25,10 @@ public class GameService {
         return mapper.getNewGamePresentation(savedGame);
     }
 
-    public GamePresentation makeMove(UUID gameId, Integer pitIndex) {
+    public GamePresentation makeMove(UUID gameId, Integer pitId) {
         var game = findGame(gameId);
         synchronized (game) {
-            var pit = getPit(pitIndex, game);
+            var pit = getPit(pitId, game);
             gameFlow.makeMove(game, pit);
             return mapper.getGamePresentation(game);
         }
@@ -38,8 +38,8 @@ public class GameService {
         return mapper.getGamePresentation(findGame(gameId));
     }
 
-    private Pit getPit(Integer pitIndex, Game game) {
-        var optionalPit = game.getPitByIndex(pitIndex);
+    private Pit getPit(Integer pitId, Game game) {
+        var optionalPit = game.getPitById(pitId);
         if (optionalPit.isEmpty()) {
             throw new KalahException("Pit not found");
         }

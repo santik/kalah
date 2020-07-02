@@ -12,7 +12,7 @@ class LastWasEmptyRuleTest {
         //arrange
         var rule = new LastWasEmptyRule();
         var game = Game.create();
-        var pit = game.getPitByIndex(1).get();
+        var pit = game.getPitById(1).get();
         pit.setSeedsCount(1);
 
         //act
@@ -28,7 +28,7 @@ class LastWasEmptyRuleTest {
         //arrange
         var rule = new LastWasEmptyRule();
         var game = Game.create();
-        var pit = game.getPitByIndex(1).get();
+        var pit = game.getPitById(1).get();
         pit.setSeedsCount(2);
 
         //act
@@ -44,7 +44,7 @@ class LastWasEmptyRuleTest {
         //arrange
         var rule = new LastWasEmptyRule();
         var game = Game.create();
-        var pit = game.getPitByIndex(1).get();
+        var pit = game.getPitById(1).get();
         pit.setSeedsCount(1);
         game.getOppositeTo(pit).setSeedsCount(0);
 

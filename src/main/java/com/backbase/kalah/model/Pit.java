@@ -10,7 +10,7 @@ public class Pit {
     @Setter
     private Integer seedsCount;
     private Integer playerIndex; //instead of checking inside the range of indexes
-    private Integer index; //instead of doing indexOf calls
+    private Integer id; //instead of doing indexOf calls
 
     public Boolean hasSeeds() {
         return seedsCount != 0;

@@ -30,10 +30,10 @@ public class GameController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newGamePresentation);
     }
 
-    @PutMapping("/{gameId}/pits/{pitIndex}")
-    public ResponseEntity move(@PathVariable UUID gameId, @PathVariable Integer pitIndex) {
+    @PutMapping("/{gameId}/pits/{pitId}")
+    public ResponseEntity move(@PathVariable UUID gameId, @PathVariable Integer pitId) {
         try {
-            return ResponseEntity.ok().body(gameService.makeMove(gameId, pitIndex));
+            return ResponseEntity.ok().body(gameService.makeMove(gameId, pitId));
         } catch (KalahException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

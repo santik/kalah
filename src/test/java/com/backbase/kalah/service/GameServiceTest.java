@@ -56,7 +56,7 @@ class GameServiceTest {
         var newGamePresentation = service.makeMove(id, 1);
 
         //assert
-        verify(gameFlow).makeMove(game, game.getPitByIndex(1).get());
+        verify(gameFlow).makeMove(game, game.getPitById(1).get());
         assertSame(presentation, newGamePresentation);
     }
 

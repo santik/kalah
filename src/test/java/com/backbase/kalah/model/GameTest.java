@@ -20,10 +20,10 @@ class GameTest {
 
         assertEquals(15, game.getBoard().size());
         game.getBoard().forEach(pit -> {
-            if (pit != null && (pit.getIndex() == 7 || pit.getIndex() == 14)) {
+            if (pit != null && (pit.getId() == 7 || pit.getId() == 14)) {
                 assertEquals(0, pit.getSeedsCount());
             }
-            if (pit != null && pit.getIndex() != 7 && pit.getIndex() != 14) {
+            if (pit != null && pit.getId() != 7 && pit.getId() != 14) {
                 assertEquals(6, pit.getSeedsCount());
             }
         });
@@ -62,69 +62,69 @@ class GameTest {
     }
 
     @Test
-    void getNextTo_withMiddleIndex_shouldReturnNext() {
+    void getNextTo_withMiddleId_shouldReturnNext() {
         //arrange
         Game game = Game.create();
-        int pitIndex = 1;
-        var initialPit = game.getPitByIndex(pitIndex).get();
+        int pitId = 1;
+        var initialPit = game.getPitById(pitId).get();
 
         //act
         Pit nextTo = game.getNextTo(initialPit);
 
         //assert
-        assertEquals(pitIndex, initialPit.getIndex());
-        assertEquals(pitIndex + 1, nextTo.getIndex());
+        assertEquals(pitId, initialPit.getId());
+        assertEquals(pitId + 1, nextTo.getId());
     }
 
     @Test
-    void getNextTo_withEndIndex_shouldReturnNext() {
+    void getNextTo_withEndId_shouldReturnNext() {
         //arrange
         Game game = Game.create();
-        int pitIndex = 14;
-        var initialPit = game.getPitByIndex(pitIndex).get();
+        int pitId = 14;
+        var initialPit = game.getPitById(pitId).get();
 
         //act
         Pit nextTo = game.getNextTo(initialPit);
 
         //assert
-        assertEquals(pitIndex, initialPit.getIndex());
-        assertEquals(1, nextTo.getIndex());
+        assertEquals(pitId, initialPit.getId());
+        assertEquals(1, nextTo.getId());
     }
 
     @Test
-    void getPitByIndex_withExistingIndex_shouldReturnPit() {
+    void getPitById_withExistingId_shouldReturnPit() {
         //arrange
         Game game = Game.create();
-        Integer index = 5;
+        Integer id = 5;
 
         //act
-        var optionalPit = game.getPitByIndex(index);
+        var optionalPit = game.getPitById(id);
 
         //assert
         assertTrue(optionalPit.isPresent());
     }
 
     @Test
-    void getPitByIndex_withZeroIndex_shouldReturnPit() {
+    void getPitById_withZeroId_shouldReturnPit() {
         //arrange
         Game game = Game.create();
-        Integer index = 0;
+        Integer id = 0;
 
         //act
-        var optionalPit = game.getPitByIndex(index);
+        var optionalPit = game.getPitById(id);
 
         //assert
         assertTrue(optionalPit.isEmpty());
     }
 
     @Test
-    void getPitByIndex_withNotExistingIndex_shouldReturnPit() {
+    void getPitById_withNotExistingId_shouldReturnPit() {
         //arrange
         Game game = Game.create();
-        Integer index = 15;
+        Integer id = 15;
 
         //act
-        var optionalPit = game.getPitByIndex(index);
+        var optionalPit = game.getPitById(id);
 
         //assert
         assertTrue(optionalPit.isEmpty());
@@ -134,14 +134,14 @@ class GameTest {
     void getOppositeTo() {
         //arrange
         Game game = Game.create();
-        Integer index = 4;
-        var pit = game.getPitByIndex(index).get();
+        Integer id = 4;
+        var pit = game.getPitById(id).get();
 
         //act
         var oppositeTo = game.getOppositeTo(pit);
 
         //assert
-        assertEquals(10, oppositeTo.getIndex());
+        assertEquals(10, oppositeTo.getId());
     }
 
     @Test
@@ -151,8 +151,8 @@ class GameTest {
 
         //act && assert
         assertEquals(Status.PLAYER1_TURN, game.getStatus());
-        assertTrue(game.isOpponentKalah(game.getPitByIndex(14).get()));
-        assertFalse(game.isOpponentKalah(game.getPitByIndex(7).get()));
+        assertTrue(game.isOpponentKalah(game.getPitById(14).get()));
+        assertFalse(game.isOpponentKalah(game.getPitById(7).get()));
     }
 
     @Test
@@ -161,8 +161,8 @@ class GameTest {
         Game game = Game.create();
 
         //act && assert
-        assertTrue(game.isKalah(game.getPitByIndex(7).get()));
-        assertTrue(game.isKalah(game.getPitByIndex(14).get()));
+        assertTrue(game.isKalah(game.getPitById(7).get()));
+        assertTrue(game.isKalah(game.getPitById(14).get()));
     }
 
     @Test
@@ -234,7 +234,7 @@ class GameTest {
 
         //act && assert
         assertEquals(Status.PLAYER1_TURN, game.getStatus());
-        assertTrue(game.isCurrentPlayerPit(game.getPitByIndex(1).get()));
+        assertTrue(game.isCurrentPlayerPit(game.getPitById(1).get()));
     }
 
     @Test
@@ -244,7 +244,7 @@ class GameTest {
 
         //act && assert
         assertEquals(Status.PLAYER1_TURN, game.getStatus());
-        assertTrue(game.isCurrentPlayerPit(game.getPitByIndex(7).get()));
+        assertTrue(game.isCurrentPlayerPit(game.getPitById(7).get()));
     }
 
     @Test

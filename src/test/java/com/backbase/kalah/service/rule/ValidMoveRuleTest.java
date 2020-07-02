@@ -15,7 +15,7 @@ class ValidMoveRuleTest {
         var rule = new ValidMoveRule();
         var game = Game.create();
         game.finish();
-        var pit = game.getPitByIndex(1).get();
+        var pit = game.getPitById(1).get();
 
         //act && assert
         assertThrows(KalahException.class, () -> rule.apply(game, pit));
@@ -27,7 +27,7 @@ class ValidMoveRuleTest {
         var rule = new ValidMoveRule();
         var game = Game.create();
         game.finish();
-        var pit = game.getPitByIndex(7).get();
+        var pit = game.getPitById(7).get();
 
         //act && assert
         assertThrows(KalahException.class, () -> rule.apply(game, pit));
@@ -39,7 +39,7 @@ class ValidMoveRuleTest {
         var rule = new ValidMoveRule();
         var game = Game.create();
         game.finish();
-        var pit = game.getPitByIndex(8).get();
+        var pit = game.getPitById(8).get();
 
         //act && assert
         assertThrows(KalahException.class, () -> rule.apply(game, pit));
@@ -51,7 +51,7 @@ class ValidMoveRuleTest {
         var rule = new ValidMoveRule();
         var game = Game.create();
         game.finish();
-        var pit = game.getPitByIndex(1).get();
+        var pit = game.getPitById(1).get();
         pit.setSeedsCount(0);
 
         //act && assert
@@ -63,7 +63,7 @@ class ValidMoveRuleTest {
         //arrange
         var rule = new ValidMoveRule();
         var game = Game.create();
-        var pit = game.getPitByIndex(1).get();
+        var pit = game.getPitById(1).get();
 
         //act && assert
         assertSame(pit, rule.apply(game, pit));

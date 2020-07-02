@@ -3,7 +3,6 @@ package com.backbase.kalah.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,23 +58,23 @@ public class Game {
     }
 
     public Pit getNextTo(Pit pit) {
-        var index = pit.getIndex();
-        if (index == board.size() - 1) {
-            index = 0;
+        var id = pit.getId();
+        if (id == board.size() - 1) {
+            id = 0;
         }
-        return board.get(index + 1);
+        return board.get(id + 1);
     }
 
-    public Optional<Pit> getPitByIndex(Integer pitIndex) {
-        if (pitIndex < 1 || pitIndex >= board.size()) {
+    public Optional<Pit> getPitById(Integer pitId) {
+        if (pitId < 1 || pitId >= board.size()) {
             return Optional.empty();
         }
-        return Optional.of(board.get(pitIndex));
+        return Optional.of(board.get(pitId));
     }
 
     public Pit getOppositeTo(Pit pit) {
-        var index = board.size() - pit.getIndex() - 1;
-        return board.get(index);
+        var id = board.size() - pit.getId() - 1;
+        return board.get(id);
     }
 
     public boolean isOpponentKalah(Pit pit) {
@@ -124,11 +123,11 @@ public class Game {
     }
 
     private boolean isPlayer1Kalah(Pit pit) {
-        return pit.getIndex().equals(PLAYER1_KALAH_INDEX);
+        return pit.getId().equals(PLAYER1_KALAH_INDEX);
     }
 
     private boolean isPlayer2Kalah(Pit pit) {
-        return pit.getIndex().equals(PLAYER2_KALAH_INDEX);
+        return pit.getId().equals(PLAYER2_KALAH_INDEX);
     }
 
     public void setPlayer1Winner() {

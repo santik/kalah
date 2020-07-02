@@ -15,7 +15,7 @@ class GameFlowTest {
     void makeMove_shouldCallEveryRule() {
         //arrange
         var game = Game.create();
-        var pit = game.getPitByIndex(1).get();
+        var pit = game.getPitById(1).get();
 
         var rule1 = mock(GameFlowRule.class);
         when(rule1.apply(game, pit)).thenReturn(pit);
