@@ -25,12 +25,12 @@ public class GameE2ETest {
 
     @Test
     public void testGameFlow() {
-        //create game
         ResponseEntity<NewGamePresentation> newGameResponse = restTemplate.postForEntity(getEndpointPath(), null, NewGamePresentation.class);
         var game = newGameResponse.getBody();
         var id = game.getId();
 
         //trying all pits one by one including wrong ones to make sure it doesn't break on validation
+        //until game finished
         var pit = 1;
         var totalMoves = 0;
         while (true) {
