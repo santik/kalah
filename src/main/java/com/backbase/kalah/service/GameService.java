@@ -40,10 +40,12 @@ public class GameService {
     }
 
     private Pit getPit(Integer pitIndex, Game game) {
-        if (pitIndex < 1 || pitIndex >= game.getBoard().size()) { //TODO can I do it without seeing internals?
+        var optionalPit = game.getPitByIndex(pitIndex);
+        if (optionalPit.isEmpty()) {
             throw new KalahException("Pit not found");
         }
-        return game.getBoard().get(pitIndex);
+
+        return optionalPit.get();
     }
 
     private Game findGame(UUID gameId) {

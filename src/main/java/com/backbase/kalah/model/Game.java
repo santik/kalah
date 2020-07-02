@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
@@ -62,6 +63,13 @@ public class Game {
             index = 0;
         }
         return board.get(index + 1);
+    }
+
+    public Optional<Pit> getPitByIndex(Integer pitIndex) {
+        if (pitIndex < 1 || pitIndex >= board.size()) {
+            return Optional.empty();
+        }
+        return Optional.of(board.get(pitIndex));
     }
 
     public Pit getOppositeTo(Pit pit) {
