@@ -10,10 +10,11 @@ import static org.junit.Assert.assertTrue;
 
 class GameInMemoryRepositoryTest {
 
+    private GameInMemoryRepository repo = new GameInMemoryRepository();
+
     @Test
     void save_shouldPutGameIntoRepo() {
         //arrange
-        var repo = new GameInMemoryRepository();
         var game = Game.create();
 
         //act
@@ -25,9 +26,6 @@ class GameInMemoryRepositoryTest {
 
     @Test
     void findById_withNotExistingGame_shouldReturnEmpty() {
-        //arrange
-        var repo = new GameInMemoryRepository();
-
         //act && assert
         assertTrue(repo.findById(UUID.randomUUID()).isEmpty());
     }
@@ -35,7 +33,6 @@ class GameInMemoryRepositoryTest {
     @Test
     void findById_withExistingGame_shouldReturnEmpty() {
         //arrange
-        var repo = new GameInMemoryRepository();
         var game = Game.create();
         repo.save(game);
 

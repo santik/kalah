@@ -5,6 +5,7 @@ import com.backbase.kalah.model.Game;
 import com.backbase.kalah.presentation.GamePresentation;
 import com.backbase.kalah.presentation.NewGamePresentation;
 import com.backbase.kalah.repository.GameRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -18,15 +19,24 @@ import static org.mockito.Mockito.when;
 
 class GameServiceTest {
 
+    private GameRepository gameRepository;
+    private GamePresentationMapper mapper;
+    private GameFlow gameFlow;
+    private GameService service;
+    private Game game;
+
+    @BeforeEach
+    public void setUp() {
+        gameRepository = mock(GameRepository.class);
+        mapper = mock(GamePresentationMapper.class);
+        gameFlow = mock(GameFlow.class);
+        service = new GameService(gameRepository, mapper, gameFlow);
+        game = Game.create();
+    }
+
     @Test
     void initGame_shouldCallRepoAndReturnCorrectPresentation() {
         //arrange
-        var gameRepository = mock(GameRepository.class);
-        var mapper = mock(GamePresentationMapper.class);
-        var gameFlow = mock(GameFlow.class);
-        var service = new GameService(gameRepository, mapper, gameFlow);
-
-        var game = Game.create();
         when(gameRepository.save(any(Game.class))).thenReturn(game);
         var presentation = NewGamePresentation.builder().build();
         when(mapper.getNewGamePresentation(game)).thenReturn(presentation);
@@ -41,12 +51,6 @@ class GameServiceTest {
     @Test
     void makeMove_withExistingGameAndPit_shouldCallFlowAndReturnCorrectPresentation() {
         //arrange
-        var gameRepository = mock(GameRepository.class);
-        var mapper = mock(GamePresentationMapper.class);
-        var gameFlow = mock(GameFlow.class);
-        var service = new GameService(gameRepository, mapper, gameFlow);
-
-        var game = Game.create();
         UUID id = UUID.randomUUID();
         when(gameRepository.findById(id)).thenReturn(Optional.of(game));
         var presentation = GamePresentation.builder().build();
@@ -63,11 +67,6 @@ class GameServiceTest {
     @Test
     void makeMove_withNotExistingGame_shouldThrowException() {
         //arrange
-        var gameRepository = mock(GameRepository.class);
-        var mapper = mock(GamePresentationMapper.class);
-        var gameFlow = mock(GameFlow.class);
-        var service = new GameService(gameRepository, mapper, gameFlow);
-
         UUID id = UUID.randomUUID();
         when(gameRepository.findById(id)).thenReturn(Optional.empty());
 
@@ -78,12 +77,6 @@ class GameServiceTest {
     @Test
     void makeMove_withExistingGameAndNotExistingPit_shouldThrowException() {
         //arrange
-        var gameRepository = mock(GameRepository.class);
-        var mapper = mock(GamePresentationMapper.class);
-        var gameFlow = mock(GameFlow.class);
-        var service = new GameService(gameRepository, mapper, gameFlow);
-
-        var game = Game.create();
         UUID id = UUID.randomUUID();
         when(gameRepository.findById(id)).thenReturn(Optional.of(game));
         var presentation = GamePresentation.builder().build();
@@ -96,12 +89,6 @@ class GameServiceTest {
     @Test
     void getGame_withExistingGame_shouldReturnCorrectPresentation() {
         //arrange
-        var gameRepository = mock(GameRepository.class);
-        var mapper = mock(GamePresentationMapper.class);
-        var gameFlow = mock(GameFlow.class);
-        var service = new GameService(gameRepository, mapper, gameFlow);
-
-        var game = Game.create();
         UUID id = UUID.randomUUID();
         when(gameRepository.findById(id)).thenReturn(Optional.of(game));
         var presentation = GamePresentation.builder().build();
@@ -117,11 +104,6 @@ class GameServiceTest {
     @Test
     void getGame_withNotExistingGame_shouldThrowException() {
         //arrange
-        var gameRepository = mock(GameRepository.class);
-        var mapper = mock(GamePresentationMapper.class);
-        var gameFlow = mock(GameFlow.class);
-        var service = new GameService(gameRepository, mapper, gameFlow);
-
         UUID id = UUID.randomUUID();
         when(gameRepository.findById(id)).thenReturn(Optional.empty());
 

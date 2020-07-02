@@ -1,16 +1,24 @@
 package com.backbase.kalah.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
 
+    private Integer initSeedsPerPit = (Integer) ReflectionTestUtils.getField(Game.class, "INIT_SEEDS_PER_PIT");
+    private Game game;
+
+    @BeforeEach
+    public void setUp() {
+        game = Game.create();
+    }
+
+
     @Test
     void createGame_shouldReturn_CorrectGame() {
-        //act
-        Game game = Game.create();
-
         //assert
         assertNotNull(game);
         assertNotNull(game.getStatus());
@@ -24,25 +32,19 @@ class GameTest {
                 assertEquals(0, pit.getSeedsCount());
             }
             if (pit != null && pit.getId() != 7 && pit.getId() != 14) {
-                assertEquals(6, pit.getSeedsCount());
+                assertEquals(initSeedsPerPit, pit.getSeedsCount());
             }
         });
     }
 
     @Test
     void isFinished_gameNotFinished_shouldReturnFalse() {
-        //arrange
-        Game game = Game.create();
-
         //act && assert
         assertFalse(game.isFinished());
     }
 
     @Test
     void isFinished_gameFinished_shouldReturnTrue() {
-        //arrange
-        Game game = Game.create();
-
         //act
         game.finish();
 
@@ -52,9 +54,6 @@ class GameTest {
 
     @Test
     void flipTurn() {
-        //arrange
-        Game game = Game.create();
-
         //act && assert
         assertEquals(Status.PLAYER1_TURN, game.getStatus());
         game.flipTurn();
@@ -64,7 +63,6 @@ class GameTest {
     @Test
     void getNextTo_withMiddleId_shouldReturnNext() {
         //arrange
-        Game game = Game.create();
         int pitId = 1;
         var initialPit = game.getPitById(pitId).get();
 
@@ -79,7 +77,6 @@ class GameTest {
     @Test
     void getNextTo_withEndId_shouldReturnNext() {
         //arrange
-        Game game = Game.create();
         int pitId = 14;
         var initialPit = game.getPitById(pitId).get();
 
@@ -94,7 +91,6 @@ class GameTest {
     @Test
     void getPitById_withExistingId_shouldReturnPit() {
         //arrange
-        Game game = Game.create();
         Integer id = 5;
 
         //act
@@ -107,7 +103,6 @@ class GameTest {
     @Test
     void getPitById_withZeroId_shouldReturnPit() {
         //arrange
-        Game game = Game.create();
         Integer id = 0;
 
         //act
@@ -120,7 +115,6 @@ class GameTest {
     @Test
     void getPitById_withNotExistingId_shouldReturnPit() {
         //arrange
-        Game game = Game.create();
         Integer id = 15;
 
         //act
@@ -133,7 +127,6 @@ class GameTest {
     @Test
     void getOppositeTo() {
         //arrange
-        Game game = Game.create();
         Integer id = 4;
         var pit = game.getPitById(id).get();
 
@@ -146,9 +139,6 @@ class GameTest {
 
     @Test
     void isOpponentKalah_shouldReturnCorrectAnswer() {
-        //arrange
-        Game game = Game.create();
-
         //act && assert
         assertEquals(Status.PLAYER1_TURN, game.getStatus());
         assertTrue(game.isOpponentKalah(game.getPitById(14).get()));
@@ -157,9 +147,6 @@ class GameTest {
 
     @Test
     void isKalah() {
-        //arrange
-        Game game = Game.create();
-
         //act && assert
         assertTrue(game.isKalah(game.getPitById(7).get()));
         assertTrue(game.isKalah(game.getPitById(14).get()));
@@ -167,18 +154,12 @@ class GameTest {
 
     @Test
     void isPlayer1EmptyPits_withNotEmptyPits_shouldReturnTrue() {
-        //arrange
-        Game game = Game.create();
-
         //act && assert
         assertFalse(game.isPlayer1EmptyPits());
     }
 
     @Test
     void isPlayer1EmptyPits_withEmptyPits_shouldReturnTrue() {
-        //arrange
-        Game game = Game.create();
-
         //act
         game.getBoard().forEach(pit -> {
             if (pit != null) {
@@ -186,25 +167,18 @@ class GameTest {
             }
         });
 
-
         //assert
         assertTrue(game.isPlayer1EmptyPits());
     }
 
     @Test
     void isPlayer2EmptyPits_withNotEmptyPits_shouldReturnTrue() {
-        //arrange
-        Game game = Game.create();
-
         //act && assert
         assertFalse(game.isPlayer2EmptyPits());
     }
 
     @Test
     void isPlayer2EmptyPits_withEmptyPits_shouldReturnTrue() {
-        //arrange
-        Game game = Game.create();
-
         //act
         game.getBoard().forEach(pit -> {
             if (pit != null) {
@@ -219,19 +193,13 @@ class GameTest {
 
     @Test
     void countPlayerSeeds() {
-        //arrange
-        Game game = Game.create();
-
         //act && assert
-        assertEquals(36, game.countPlayer1Seeds());
-        assertEquals(36, game.countPlayer2Seeds());
+        assertEquals(initSeedsPerPit * 6, game.countPlayer1Seeds());
+        assertEquals(initSeedsPerPit * 6, game.countPlayer2Seeds());
     }
 
     @Test
     void isCurrentPlayerPit() {
-        //arrange
-        Game game = Game.create();
-
         //act && assert
         assertEquals(Status.PLAYER1_TURN, game.getStatus());
         assertTrue(game.isCurrentPlayerPit(game.getPitById(1).get()));
@@ -239,9 +207,6 @@ class GameTest {
 
     @Test
     void getCurrentPlayerKalah() {
-        //arrange
-        Game game = Game.create();
-
         //act && assert
         assertEquals(Status.PLAYER1_TURN, game.getStatus());
         assertTrue(game.isCurrentPlayerPit(game.getPitById(7).get()));
@@ -249,9 +214,6 @@ class GameTest {
 
     @Test
     void setWinner() {
-        //arrange
-        Game game = Game.create();
-
         //act && assert
         assertNull(game.getWinner());
         game.setPlayer1Winner();

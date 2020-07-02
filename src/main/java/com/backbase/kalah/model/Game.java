@@ -14,9 +14,9 @@ import java.util.stream.IntStream;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Game {
 
+    private static final Integer INIT_SEEDS_PER_PIT = 6;
     private static final Integer PLAYER1_INDEX = 1;
     private static final Integer PLAYER2_INDEX = 2;
-    private static final Integer SEEDS_PER_PIT = 6;
     private static final Integer PLAYER1_KALAH_INDEX = 7;
     private static final Integer PLAYER2_KALAH_INDEX = 14;
 
@@ -37,11 +37,11 @@ public class Game {
         board.add(null); //just to fill 0 index
 
         IntStream.range(1, PLAYER1_KALAH_INDEX)
-                .forEach(i -> board.add(new Pit(SEEDS_PER_PIT, PLAYER1_INDEX, i)));
+                .forEach(i -> board.add(new Pit(INIT_SEEDS_PER_PIT, PLAYER1_INDEX, i)));
         board.add(new Pit(0, PLAYER1_INDEX, PLAYER1_KALAH_INDEX));
 
         IntStream.range(PLAYER1_KALAH_INDEX + 1, PLAYER2_KALAH_INDEX)
-                .forEach(i -> board.add(new Pit(SEEDS_PER_PIT, PLAYER2_INDEX, i)));
+                .forEach(i -> board.add(new Pit(INIT_SEEDS_PER_PIT, PLAYER2_INDEX, i)));
         board.add(new Pit(0, PLAYER2_INDEX, PLAYER2_KALAH_INDEX));
     }
 

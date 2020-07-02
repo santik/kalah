@@ -2,6 +2,7 @@ package com.backbase.kalah.service.rule;
 
 import com.backbase.kalah.exception.KalahException;
 import com.backbase.kalah.model.Game;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertSame;
@@ -9,11 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ValidMoveRuleTest {
 
+    private ValidMoveRule rule = new ValidMoveRule();
+    private Game game;
+
+    @BeforeEach
+    public void setUp() {
+        game = Game.create();
+    }
+
     @Test
     void apply_withFinishedGame_shouldThrowException() {
         //arrange
-        var rule = new ValidMoveRule();
-        var game = Game.create();
         game.finish();
         var pit = game.getPitById(1).get();
 
@@ -24,9 +31,6 @@ class ValidMoveRuleTest {
     @Test
     void apply_withKalahPit_shouldThrowException() {
         //arrange
-        var rule = new ValidMoveRule();
-        var game = Game.create();
-        game.finish();
         var pit = game.getPitById(7).get();
 
         //act && assert
@@ -36,9 +40,6 @@ class ValidMoveRuleTest {
     @Test
     void apply_withNotCurrentPlayerPit_shouldThrowException() {
         //arrange
-        var rule = new ValidMoveRule();
-        var game = Game.create();
-        game.finish();
         var pit = game.getPitById(8).get();
 
         //act && assert
@@ -48,9 +49,6 @@ class ValidMoveRuleTest {
     @Test
     void apply_withEmptyPit_shouldThrowException() {
         //arrange
-        var rule = new ValidMoveRule();
-        var game = Game.create();
-        game.finish();
         var pit = game.getPitById(1).get();
         pit.setSeedsCount(0);
 
@@ -61,8 +59,6 @@ class ValidMoveRuleTest {
     @Test
     void apply_AllOk_shouldReturnSamePit() {
         //arrange
-        var rule = new ValidMoveRule();
-        var game = Game.create();
         var pit = game.getPitById(1).get();
 
         //act && assert

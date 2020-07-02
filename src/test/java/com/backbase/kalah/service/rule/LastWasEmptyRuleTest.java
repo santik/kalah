@@ -1,17 +1,24 @@
 package com.backbase.kalah.service.rule;
 
 import com.backbase.kalah.model.Game;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 
 class LastWasEmptyRuleTest {
 
+    private LastWasEmptyRule rule = new LastWasEmptyRule();
+    private Game game;
+
+    @BeforeEach
+    public void setUp() {
+        game = Game.create();
+    }
+
     @Test
     void apply_withEmptyPitAndHasOpposite_shouldPutSeedsInKalah() {
         //arrange
-        var rule = new LastWasEmptyRule();
-        var game = Game.create();
         var pit = game.getPitById(1).get();
         pit.setSeedsCount(1);
 
@@ -26,8 +33,6 @@ class LastWasEmptyRuleTest {
     @Test
     void apply_withNotEmptyPit_shouldNotPutSeedsInKalah() {
         //arrange
-        var rule = new LastWasEmptyRule();
-        var game = Game.create();
         var pit = game.getPitById(1).get();
         pit.setSeedsCount(2);
 
@@ -42,8 +47,6 @@ class LastWasEmptyRuleTest {
     @Test
     void apply_withEmptyPitAndHasNoOpposite_shouldNotPutSeedsInKalah() {
         //arrange
-        var rule = new LastWasEmptyRule();
-        var game = Game.create();
         var pit = game.getPitById(1).get();
         pit.setSeedsCount(1);
         game.getOppositeTo(pit).setSeedsCount(0);
