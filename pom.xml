@@ -17,7 +17,6 @@
 	<properties>
 		<java.version>11</java.version>
 		<lombok.version>1.16.22</lombok.version>
-		<jsonschema2pojo-maven-plugin.version>1.0.2</jsonschema2pojo-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -52,34 +51,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-<!--			<plugin>-->
-<!--				<groupId>org.jsonschema2pojo</groupId>-->
-<!--				<artifactId>jsonschema2pojo-maven-plugin</artifactId>-->
-<!--				<version>${jsonschema2pojo-maven-plugin.version}</version>-->
-<!--				<configuration>-->
-<!--					<generateBuilders>true</generateBuilders>-->
-<!--					<includeConstructors>true</includeConstructors>-->
-<!--					<includeAdditionalProperties>true</includeAdditionalProperties>-->
-<!--					<includeJsr303Annotations>true</includeJsr303Annotations>-->
-<!--					<serializable>true</serializable>-->
-<!--					<useDoubleNumbers>true</useDoubleNumbers>-->
-<!--				</configuration>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>schema.json-generate</id>-->
-<!--						<phase>generate-sources</phase>-->
-<!--						<goals>-->
-<!--							<goal>generate</goal>-->
-<!--						</goals>-->
-<!--						<configuration>-->
-<!--							<sourceDirectory>${project.basedir}/src/main/resources/schema/</sourceDirectory>-->
-<!--							<targetPackage>org.backbase.api</targetPackage>-->
-<!--							<outputDirectory>${project.basedir}/src/main/gensrc/</outputDirectory>-->
-<!--						</configuration>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
 		</plugins>
 	</build>
-
 </project>

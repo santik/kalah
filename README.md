@@ -1,11 +1,22 @@
-curl --header "Content-Type: application/json" --request POST http://localhost:7070/games                
+# Kalah solution
 
-curl --header "Content-Type: application/json" --request PUT http://localhost:7070/games/171a172c-efbb-4c66-8ba5-7be7c96afe16/pits/1
+### Chosen technologies
+- Java 11
+- SpringBoot
+- JUnit
 
+### Testing
+`mvn clean test`  
+98% of lines are covered.
 
+### Running
+`mvn clean package` - this will run tests and create jar file  
+then `java -jar target/kalah-0.0.1-SNAPSHOT.jar`
 
-6 6 6 5 1 
-4 4 4 4 4 4
+### Calls to access the game 
 
+Application will be running on port 7070. Port can be changed in application.properties
 
-"4" "4" "4" "6" "6" "6" "5" "1" "4" "4" "4"
+`curl --header "Content-Type: application/json" --request POST http://localhost:7070/games`
+                
+`curl --header "Content-Type: application/json" --request PUT http://localhost:7070/games/#GAME_ID#/pits/1`
