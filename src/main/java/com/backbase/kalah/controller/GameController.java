@@ -1,6 +1,6 @@
 package com.backbase.kalah.controller;
 
-import com.backbase.kalah.exception.KalahException;
+import com.backbase.kalah.presentation.GamePresentation;
 import com.backbase.kalah.service.GameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,20 +31,12 @@ public class GameController {
     }
 
     @PutMapping("/{gameId}/pits/{pitId}")
-    public ResponseEntity move(@PathVariable UUID gameId, @PathVariable Integer pitId) {
-        try {
-            return ResponseEntity.ok().body(gameService.makeMove(gameId, pitId));
-        } catch (KalahException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    public ResponseEntity<GamePresentation> move(@PathVariable UUID gameId, @PathVariable Integer pitId) {
+        return ResponseEntity.ok().body(gameService.makeMove(gameId, pitId));
     }
 
     @GetMapping("/{gameId}")
-    public ResponseEntity getGame(@PathVariable UUID gameId) {
-        try {
-            return ResponseEntity.ok().body(gameService.getGame(gameId));
-        } catch (KalahException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    public ResponseEntity<GamePresentation> getGame(@PathVariable UUID gameId) {
+        return ResponseEntity.ok().body(gameService.getGame(gameId));
     }
 }
